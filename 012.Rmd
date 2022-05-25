@@ -1,0 +1,76 @@
+## A First Example
+```{r echo = FALSE, message = FALSE, warning = FALSE}
+library(Rcpp)
+library(inline)
+setwd("~/Documents/GitHub/Seamless_R_and_Cpp/")
+```
+
+The Fibonacci sequence $F_n$ is defined by $F_n = F_{n-1} + F_{n-2}$ with 2 initial conditions $F_0 = 0$ and $F_1 = 1$. 
+
+### R solution
+```{r}
+fibR <- function(n) {
+  if (n == 0) return(0)
+  if (n == 1) return(1)
+  return (fibR(n - 1) + fibR(n - 2))
+}
+
+```
+
+### C++ solution
+```{r}
+# require Rcpp, inline
+incltxt <- '
+int fibonacci(const int x) {
+  if (x == 0) return(0);
+  if (x == 1) return(1);
+  return fibonacci(x - 1) + fibonacci(x - 2);
+}
+'
+
+fibRcpp <- cxxfunction(signature(xs="int"),
+                       plugin="Rcpp",
+                       incl=incltxt,
+                       body='
+         int x = Rcpp::as<int>(xs) ;
+         return Rcpp::wrap( fibonacci(x) ) ;
+         ')
+```
+
+> Note: This uses two key Rcpp tools, the converter functions `as` and `wrap`. 
+> 
+> 1. `as` is used to convert the incoming argument `xs` from `SEXP` to integer. 
+> 2. `wrap` converts the integer result in the integer variable `x` to the `SEXP` type. 
+> 3. In `incltxt`, we define a C++ function `fibonacci`. 
+> 4. `cxxfunction`: is used to turn code supplied as a text variable into an executable function.
+
+```{r}
+rbenchmark::benchmark(fibR(20), fibRcpp(20))
+```
+
+### Using Rcpp Attributes
+One can simply declare certain “attributes,” notably whether a function is to be exported for use from R or from another C++ function (or both). One can declare dependencies whose resolution still relies on the plugin framework provided by inline.
+```{r}
+# in c1.2.cpp: 
+# #include <Rcpp.h>
+# using namespace Rcpp;
+# 
+# // [[Rcpp::export]]
+# int fibonacci(const int x) {
+#   if (x< 2)
+#     return x;
+#   else
+#     return (fibonacci(x - 1)) + fibonacci(x - 2);
+# }
+
+sourceCpp("c++/c1.2.cpp")
+fibonacci(20)
+```
+
+> Note: 
+> 
+> 1. The `[[Rcpp::export]]` attribute preceds the function definition.
+> 2. The `sourceCpp()` reads the code from the given source file, parses it for the relevant attributes, and creates the required wrappers before calling R to compile and link just like `inline` does.
+
+
+
