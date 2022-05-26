@@ -2,6 +2,5 @@ introduction
 a-gentle-introduction-to-rcpp
 background-from-r-to-c
 a-first-example
-r-solution
-c-solution
-using-rcpp-attributes
+a-second-example
+tools-and-setup

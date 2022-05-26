@@ -2,4 +2,8 @@ h2:a-first-example A First Example
 h3:r-solution R solution
 h3:c-solution C++ solution
 h3:using-rcpp-attributes Using Rcpp Attributes
+h3:a-second-r-solution A second R solution
+h3:a-second-c-solution A second C++ solution
+h3:a-third-r-solution A third R solution
+h3:a-third-c-solution A third C++ solution
 

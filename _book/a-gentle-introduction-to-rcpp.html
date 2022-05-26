@@ -23,7 +23,7 @@
 <meta name="author" content="Hao Sun" />
 
 
-<meta name="date" content="2022-05-24" />
+<meta name="date" content="2022-05-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="index.html"/>
-
+<link rel="next" href="tools-and-setup.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -142,10 +142,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="a-gentle-introduction-to-rcpp.html"><a href="a-gentle-introduction-to-rcpp.html#background-from-r-to-c"><i class="fa fa-check"></i><b>2.1</b> Background: From R to C++</a></li>
 <li class="chapter" data-level="2.2" data-path="a-gentle-introduction-to-rcpp.html"><a href="a-gentle-introduction-to-rcpp.html#a-first-example"><i class="fa fa-check"></i><b>2.2</b> A First Example</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="a-gentle-introduction-to-rcpp.html"><a href="a-gentle-introduction-to-rcpp.html#r-solution"><i class="fa fa-check"></i><b>2.2.1</b> R solution</a></li>
-<li class="chapter" data-level="2.2.2" data-path="a-gentle-introduction-to-rcpp.html"><a href="a-gentle-introduction-to-rcpp.html#c-solution"><i class="fa fa-check"></i><b>2.2.2</b> C++ solution</a></li>
-<li class="chapter" data-level="2.2.3" data-path="a-gentle-introduction-to-rcpp.html"><a href="a-gentle-introduction-to-rcpp.html#using-rcpp-attributes"><i class="fa fa-check"></i><b>2.2.3</b> Using Rcpp Attributes</a></li>
+<li class="chapter" data-level="" data-path="a-gentle-introduction-to-rcpp.html"><a href="a-gentle-introduction-to-rcpp.html#r-solution"><i class="fa fa-check"></i>R solution</a></li>
+<li class="chapter" data-level="" data-path="a-gentle-introduction-to-rcpp.html"><a href="a-gentle-introduction-to-rcpp.html#c-solution"><i class="fa fa-check"></i>C++ solution</a></li>
+<li class="chapter" data-level="" data-path="a-gentle-introduction-to-rcpp.html"><a href="a-gentle-introduction-to-rcpp.html#using-rcpp-attributes"><i class="fa fa-check"></i>Using Rcpp Attributes</a></li>
+<li class="chapter" data-level="" data-path="a-gentle-introduction-to-rcpp.html"><a href="a-gentle-introduction-to-rcpp.html#a-second-r-solution"><i class="fa fa-check"></i>A second R solution</a></li>
+<li class="chapter" data-level="" data-path="a-gentle-introduction-to-rcpp.html"><a href="a-gentle-introduction-to-rcpp.html#a-second-c-solution"><i class="fa fa-check"></i>A second C++ solution</a></li>
+<li class="chapter" data-level="" data-path="a-gentle-introduction-to-rcpp.html"><a href="a-gentle-introduction-to-rcpp.html#a-third-r-solution"><i class="fa fa-check"></i>A third R solution</a></li>
+<li class="chapter" data-level="" data-path="a-gentle-introduction-to-rcpp.html"><a href="a-gentle-introduction-to-rcpp.html#a-third-c-solution"><i class="fa fa-check"></i>A third C++ solution</a></li>
 </ul></li>
+<li class="chapter" data-level="2.3" data-path="a-gentle-introduction-to-rcpp.html"><a href="a-gentle-introduction-to-rcpp.html#a-second-example"><i class="fa fa-check"></i><b>2.3</b> A Second Example</a>
+<ul>
+<li class="chapter" data-level="" data-path="a-gentle-introduction-to-rcpp.html"><a href="a-gentle-introduction-to-rcpp.html#problem-setting"><i class="fa fa-check"></i>Problem Setting</a></li>
+<li class="chapter" data-level="" data-path="a-gentle-introduction-to-rcpp.html"><a href="a-gentle-introduction-to-rcpp.html#r-solution-1"><i class="fa fa-check"></i>R solution</a></li>
+<li class="chapter" data-level="" data-path="a-gentle-introduction-to-rcpp.html"><a href="a-gentle-introduction-to-rcpp.html#c-solution-1"><i class="fa fa-check"></i>C++ Solution</a></li>
+<li class="chapter" data-level="" data-path="a-gentle-introduction-to-rcpp.html"><a href="a-gentle-introduction-to-rcpp.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tools-and-setup.html"><a href="tools-and-setup.html"><i class="fa fa-check"></i><b>3</b> Tools and Setup</a>
+<ul>
+<li class="chapter" data-level="" data-path="tools-and-setup.html"><a href="tools-and-setup.html#the-inline-package"><i class="fa fa-check"></i>The inline package</a></li>
+<li class="chapter" data-level="" data-path="tools-and-setup.html"><a href="tools-and-setup.html#rcpp-attributes"><i class="fa fa-check"></i>Rcpp Attributes</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -197,16 +213,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="a-first-example" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> A First Example<a href="a-gentle-introduction-to-rcpp.html#a-first-example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The Fibonacci sequence <span class="math inline">\(F_n\)</span> is defined by <span class="math inline">\(F_n = F_{n-1} + F_{n-2}\)</span> with 2 initial conditions <span class="math inline">\(F_0 = 0\)</span> and <span class="math inline">\(F_1 = 1\)</span>.</p>
-<div id="r-solution" class="section level3 hasAnchor" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> R solution<a href="a-gentle-introduction-to-rcpp.html#r-solution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="r-solution" class="section level3 unnumbered hasAnchor">
+<h3>R solution<a href="a-gentle-introduction-to-rcpp.html#r-solution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="a-gentle-introduction-to-rcpp.html#cb2-1" aria-hidden="true" tabindex="-1"></a>fibR <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
 <span id="cb2-2"><a href="a-gentle-introduction-to-rcpp.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (n <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">return</span>(<span class="dv">0</span>)</span>
 <span id="cb2-3"><a href="a-gentle-introduction-to-rcpp.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (n <span class="sc">==</span> <span class="dv">1</span>) <span class="fu">return</span>(<span class="dv">1</span>)</span>
 <span id="cb2-4"><a href="a-gentle-introduction-to-rcpp.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span> (<span class="fu">fibR</span>(n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">fibR</span>(n <span class="sc">-</span> <span class="dv">2</span>))</span>
 <span id="cb2-5"><a href="a-gentle-introduction-to-rcpp.html#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
-<div id="c-solution" class="section level3 hasAnchor" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> C++ solution<a href="a-gentle-introduction-to-rcpp.html#c-solution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="c-solution" class="section level3 unnumbered hasAnchor">
+<h3>C++ solution<a href="a-gentle-introduction-to-rcpp.html#c-solution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="a-gentle-introduction-to-rcpp.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># require Rcpp, inline</span></span>
 <span id="cb3-2"><a href="a-gentle-introduction-to-rcpp.html#cb3-2" aria-hidden="true" tabindex="-1"></a>incltxt <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
 <span id="cb3-3"><a href="a-gentle-introduction-to-rcpp.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">int fibonacci(const int x) {</span></span>
@@ -234,11 +250,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="a-gentle-introduction-to-rcpp.html#cb4-1" aria-hidden="true" tabindex="-1"></a>rbenchmark<span class="sc">::</span><span class="fu">benchmark</span>(<span class="fu">fibR</span>(<span class="dv">20</span>), <span class="fu">fibRcpp</span>(<span class="dv">20</span>))</span></code></pre></div>
 <pre><code>##          test replications elapsed relative user.self sys.self user.child sys.child
-## 1    fibR(20)          100   0.474      237     0.470    0.003          0         0
-## 2 fibRcpp(20)          100   0.002        1     0.002    0.000          0         0</code></pre>
+## 1    fibR(20)          100   0.463    231.5     0.458    0.006          0         0
+## 2 fibRcpp(20)          100   0.002      1.0     0.002    0.000          0         0</code></pre>
 </div>
-<div id="using-rcpp-attributes" class="section level3 hasAnchor" number="2.2.3">
-<h3><span class="header-section-number">2.2.3</span> Using Rcpp Attributes<a href="a-gentle-introduction-to-rcpp.html#using-rcpp-attributes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="using-rcpp-attributes" class="section level3 unnumbered hasAnchor">
+<h3>Using Rcpp Attributes<a href="a-gentle-introduction-to-rcpp.html#using-rcpp-attributes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>One can simply declare certain “attributes,” notably whether a function is to be exported for use from R or from another C++ function (or both). One can declare dependencies whose resolution still relies on the plugin framework provided by inline.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="a-gentle-introduction-to-rcpp.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in c1.2.cpp: </span></span>
 <span id="cb6-2"><a href="a-gentle-introduction-to-rcpp.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># #include &lt;Rcpp.h&gt;</span></span>
@@ -262,6 +278,192 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The <code>sourceCpp()</code> reads the code from the given source file, parses it for the relevant attributes, and creates the required wrappers before calling R to compile and link just like <code>inline</code> does.</li>
 </ol>
 </blockquote>
+</div>
+<div id="a-second-r-solution" class="section level3 unnumbered hasAnchor">
+<h3>A second R solution<a href="a-gentle-introduction-to-rcpp.html#a-second-r-solution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>One elegant solution to retain the basic recursive structure of the algorithm with- out incurring the cost of repeated computation of the same value is provided by a method called <strong>memoization</strong>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="a-gentle-introduction-to-rcpp.html#cb8-1" aria-hidden="true" tabindex="-1"></a>mfibR <span class="ot">&lt;-</span> <span class="fu">local</span>({</span>
+<span id="cb8-2"><a href="a-gentle-introduction-to-rcpp.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  memo <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">1000</span>)) </span>
+<span id="cb8-3"><a href="a-gentle-introduction-to-rcpp.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb8-4"><a href="a-gentle-introduction-to-rcpp.html#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (x <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">return</span>(<span class="dv">0</span>) </span>
+<span id="cb8-5"><a href="a-gentle-introduction-to-rcpp.html#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (x <span class="sc">&lt;</span> <span class="dv">0</span>) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
+<span id="cb8-6"><a href="a-gentle-introduction-to-rcpp.html#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (x <span class="sc">&gt;</span> <span class="fu">length</span>(memo))</span>
+<span id="cb8-7"><a href="a-gentle-introduction-to-rcpp.html#cb8-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stop</span>(<span class="st">&quot;x too big for implementation&quot;</span>) </span>
+<span id="cb8-8"><a href="a-gentle-introduction-to-rcpp.html#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(memo[x])) <span class="fu">return</span>(memo[x])</span>
+<span id="cb8-9"><a href="a-gentle-introduction-to-rcpp.html#cb8-9" aria-hidden="true" tabindex="-1"></a>    ans <span class="ot">&lt;-</span> <span class="fu">f</span>(x<span class="dv">-2</span>) <span class="sc">+</span> <span class="fu">f</span>(x<span class="dv">-1</span>)</span>
+<span id="cb8-10"><a href="a-gentle-introduction-to-rcpp.html#cb8-10" aria-hidden="true" tabindex="-1"></a>    memo[x] <span class="ot">&lt;&lt;-</span> ans</span>
+<span id="cb8-11"><a href="a-gentle-introduction-to-rcpp.html#cb8-11" aria-hidden="true" tabindex="-1"></a>    ans</span>
+<span id="cb8-12"><a href="a-gentle-introduction-to-rcpp.html#cb8-12" aria-hidden="true" tabindex="-1"></a>    } </span>
+<span id="cb8-13"><a href="a-gentle-introduction-to-rcpp.html#cb8-13" aria-hidden="true" tabindex="-1"></a>  })</span></code></pre></div>
+<p>If a value for argument n has already been encountered, it is used. Otherwise, it is computed and stored in vector memo. This ensures that the recursive function is called exactly once for each possible value of n. </p>
+<blockquote>
+<p>Note:</p>
+<ol style="list-style-type: decimal">
+<li><code>local</code> function and <code>&lt;&lt;-</code></li>
+<li>run <code>mfibR(x)</code></li>
+</ol>
+</blockquote>
+</div>
+<div id="a-second-c-solution" class="section level3 unnumbered hasAnchor">
+<h3>A second C++ solution<a href="a-gentle-introduction-to-rcpp.html#a-second-c-solution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="a-gentle-introduction-to-rcpp.html#cb9-1" aria-hidden="true" tabindex="-1"></a>mincltxt<span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb9-2"><a href="a-gentle-introduction-to-rcpp.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="st">#include &lt;algorithm&gt;</span></span>
+<span id="cb9-3"><a href="a-gentle-introduction-to-rcpp.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="st">#include &lt;vector&gt;</span></span>
+<span id="cb9-4"><a href="a-gentle-introduction-to-rcpp.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="st">#include &lt;stdexcept&gt;</span></span>
+<span id="cb9-5"><a href="a-gentle-introduction-to-rcpp.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="st">#include &lt;cmath&gt;</span></span>
+<span id="cb9-6"><a href="a-gentle-introduction-to-rcpp.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">#include &lt;iostream&gt;</span></span>
+<span id="cb9-7"><a href="a-gentle-introduction-to-rcpp.html#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="a-gentle-introduction-to-rcpp.html#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="st">class Fib {</span></span>
+<span id="cb9-9"><a href="a-gentle-introduction-to-rcpp.html#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="st">public:</span></span>
+<span id="cb9-10"><a href="a-gentle-introduction-to-rcpp.html#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="st">  Fib(unsigned int n = 1000) {</span></span>
+<span id="cb9-11"><a href="a-gentle-introduction-to-rcpp.html#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="st">    memo.resize(n);     // reserve n elements</span></span>
+<span id="cb9-12"><a href="a-gentle-introduction-to-rcpp.html#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="st">    std::fill( memo.begin(), memo.end(), NAN );     // set to NaN</span></span>
+<span id="cb9-13"><a href="a-gentle-introduction-to-rcpp.html#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="st">    memo[0] = 0.0;      // initialize for</span></span>
+<span id="cb9-14"><a href="a-gentle-introduction-to-rcpp.html#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="st">    memo[1] = 1.0;      // n=0 and n=1</span></span>
+<span id="cb9-15"><a href="a-gentle-introduction-to-rcpp.html#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb9-16"><a href="a-gentle-introduction-to-rcpp.html#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="st">  double fibonacci(int x)  {</span></span>
+<span id="cb9-17"><a href="a-gentle-introduction-to-rcpp.html#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="st">    if (x &lt; 0)   // guard against bad input</span></span>
+<span id="cb9-18"><a href="a-gentle-introduction-to-rcpp.html#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="st">      return ( (double) NAN );</span></span>
+<span id="cb9-19"><a href="a-gentle-introduction-to-rcpp.html#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="st">    if (x &gt;= (int) memo.size() )</span></span>
+<span id="cb9-20"><a href="a-gentle-introduction-to-rcpp.html#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="st">      throw std::range_error(</span><span class="sc">\&quot;</span><span class="st">x too large for implementation</span><span class="sc">\&quot;</span><span class="st">);</span></span>
+<span id="cb9-21"><a href="a-gentle-introduction-to-rcpp.html#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="st">    if ( ! ::isnan(memo[x]))</span></span>
+<span id="cb9-22"><a href="a-gentle-introduction-to-rcpp.html#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="st">      return (memo[x]) ;   // if exist, reuse values</span></span>
+<span id="cb9-23"><a href="a-gentle-introduction-to-rcpp.html#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="st">    // build precomputed value via recursion</span></span>
+<span id="cb9-24"><a href="a-gentle-introduction-to-rcpp.html#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="st">    memo[x] = fibonacci(x-2) + fibonacci(x-1) ;</span></span>
+<span id="cb9-25"><a href="a-gentle-introduction-to-rcpp.html#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="st">    return ( memo[x] ) ;    // and return</span></span>
+<span id="cb9-26"><a href="a-gentle-introduction-to-rcpp.html#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb9-27"><a href="a-gentle-introduction-to-rcpp.html#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="st">private:</span></span>
+<span id="cb9-28"><a href="a-gentle-introduction-to-rcpp.html#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="st">  std::vector&lt; double &gt; memo ;  // internal memory for precomp.</span></span>
+<span id="cb9-29"><a href="a-gentle-introduction-to-rcpp.html#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="st">};</span></span>
+<span id="cb9-30"><a href="a-gentle-introduction-to-rcpp.html#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb9-31"><a href="a-gentle-introduction-to-rcpp.html#cb9-31" aria-hidden="true" tabindex="-1"></a>mfibRcpp <span class="ot">&lt;-</span> <span class="fu">cxxfunction</span>(<span class="fu">signature</span>(<span class="at">xs=</span><span class="st">&quot;int&quot;</span>),</span>
+<span id="cb9-32"><a href="a-gentle-introduction-to-rcpp.html#cb9-32" aria-hidden="true" tabindex="-1"></a>                        <span class="at">plugin=</span><span class="st">&quot;Rcpp&quot;</span>, <span class="at">includes=</span>mincltxt,</span>
+<span id="cb9-33"><a href="a-gentle-introduction-to-rcpp.html#cb9-33" aria-hidden="true" tabindex="-1"></a>                        <span class="at">body=</span><span class="st">&#39;</span></span>
+<span id="cb9-34"><a href="a-gentle-introduction-to-rcpp.html#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="st">              int x = Rcpp::as&lt;int&gt;(xs);</span></span>
+<span id="cb9-35"><a href="a-gentle-introduction-to-rcpp.html#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="st">              Fib f;</span></span>
+<span id="cb9-36"><a href="a-gentle-introduction-to-rcpp.html#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="st">              return Rcpp::wrap( f.fibonacci(x-1) );</span></span>
+<span id="cb9-37"><a href="a-gentle-introduction-to-rcpp.html#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span>)</span></code></pre></div>
+<p>We define a very simple C++ class Fib with three elements:
++ A constructor which is called once upon initialization.
++ A single public member function which computes Fn.
++ A private data vector holding the <strong>memoization</strong> values.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="a-gentle-introduction-to-rcpp.html#cb10-1" aria-hidden="true" tabindex="-1"></a>rbenchmark<span class="sc">::</span><span class="fu">benchmark</span>(<span class="fu">fibRcpp</span>(<span class="dv">30</span>), <span class="fu">mfibR</span>(<span class="dv">30</span>), <span class="fu">mfibRcpp</span>(<span class="dv">30</span>))</span></code></pre></div>
+<pre><code>##           test replications elapsed relative user.self sys.self user.child sys.child
+## 1  fibRcpp(30)          100   0.231       NA     0.228    0.003          0         0
+## 2    mfibR(30)          100   0.000       NA     0.000    0.000          0         0
+## 3 mfibRcpp(30)          100   0.000       NA     0.001    0.000          0         0</code></pre>
+</div>
+<div id="a-third-r-solution" class="section level3 unnumbered hasAnchor">
+<h3>A third R solution<a href="a-gentle-introduction-to-rcpp.html#a-third-r-solution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can also compute <span class="math inline">\(F_n\)</span> using iterative approach. The iterative solution improves further on the approach using memoization as it requires neither stateful memory nor recursion.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="a-gentle-introduction-to-rcpp.html#cb12-1" aria-hidden="true" tabindex="-1"></a>fibRiter<span class="ot">&lt;-</span><span class="cf">function</span>(n){</span>
+<span id="cb12-2"><a href="a-gentle-introduction-to-rcpp.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  first <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb12-3"><a href="a-gentle-introduction-to-rcpp.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  second <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb12-4"><a href="a-gentle-introduction-to-rcpp.html#cb12-4" aria-hidden="true" tabindex="-1"></a>  third <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb12-5"><a href="a-gentle-introduction-to-rcpp.html#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n)) {</span>
+<span id="cb12-6"><a href="a-gentle-introduction-to-rcpp.html#cb12-6" aria-hidden="true" tabindex="-1"></a>    third <span class="ot">&lt;-</span> first <span class="sc">+</span> second </span>
+<span id="cb12-7"><a href="a-gentle-introduction-to-rcpp.html#cb12-7" aria-hidden="true" tabindex="-1"></a>    first <span class="ot">&lt;-</span> second</span>
+<span id="cb12-8"><a href="a-gentle-introduction-to-rcpp.html#cb12-8" aria-hidden="true" tabindex="-1"></a>    second <span class="ot">&lt;-</span> third</span>
+<span id="cb12-9"><a href="a-gentle-introduction-to-rcpp.html#cb12-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb12-10"><a href="a-gentle-introduction-to-rcpp.html#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(first)</span>
+<span id="cb12-11"><a href="a-gentle-introduction-to-rcpp.html#cb12-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="a-third-c-solution" class="section level3 unnumbered hasAnchor">
+<h3>A third C++ solution<a href="a-gentle-introduction-to-rcpp.html#a-third-c-solution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="a-gentle-introduction-to-rcpp.html#cb13-1" aria-hidden="true" tabindex="-1"></a>fibRcppIter<span class="ot">&lt;-</span><span class="fu">cxxfunction</span>(<span class="fu">signature</span>(<span class="at">xs=</span><span class="st">&quot;int&quot;</span>), <span class="at">plugin=</span><span class="st">&quot;Rcpp&quot;</span>,</span>
+<span id="cb13-2"><a href="a-gentle-introduction-to-rcpp.html#cb13-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">body=</span><span class="st">&#39;</span></span>
+<span id="cb13-3"><a href="a-gentle-introduction-to-rcpp.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="st">   int n = Rcpp::as&lt;int&gt;(xs);</span></span>
+<span id="cb13-4"><a href="a-gentle-introduction-to-rcpp.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="st">   double first = 0; </span></span>
+<span id="cb13-5"><a href="a-gentle-introduction-to-rcpp.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="st">   double second = 1; </span></span>
+<span id="cb13-6"><a href="a-gentle-introduction-to-rcpp.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="st">   double third = 0; </span></span>
+<span id="cb13-7"><a href="a-gentle-introduction-to-rcpp.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="st">   for (int i=0; i&lt;n; i++) {</span></span>
+<span id="cb13-8"><a href="a-gentle-introduction-to-rcpp.html#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="st">    third = first + second; </span></span>
+<span id="cb13-9"><a href="a-gentle-introduction-to-rcpp.html#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="st">    first = second;</span></span>
+<span id="cb13-10"><a href="a-gentle-introduction-to-rcpp.html#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="st">    second = third;</span></span>
+<span id="cb13-11"><a href="a-gentle-introduction-to-rcpp.html#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="st">   }</span></span>
+<span id="cb13-12"><a href="a-gentle-introduction-to-rcpp.html#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="st">  return Rcpp::wrap(first);</span></span>
+<span id="cb13-13"><a href="a-gentle-introduction-to-rcpp.html#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span>)</span></code></pre></div>
+<blockquote>
+<p>Note:</p>
+<ol style="list-style-type: decimal">
+<li>From this example, we do not need to write a Cpp function separately. We can put the Cpp function in the <code>body</code> argument of <code>cxxfunction</code>.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="a-gentle-introduction-to-rcpp.html#cb14-1" aria-hidden="true" tabindex="-1"></a>rbenchmark<span class="sc">::</span><span class="fu">benchmark</span>(<span class="fu">mfibR</span>(<span class="dv">100</span>), <span class="fu">mfibRcpp</span>(<span class="dv">100</span>), <span class="fu">fibRiter</span>(<span class="dv">100</span>), <span class="fu">fibRcppIter</span>(<span class="dv">100</span>))</span></code></pre></div>
+<pre><code>##               test replications elapsed relative user.self sys.self user.child sys.child
+## 4 fibRcppIter(100)          100   0.000       NA     0.000        0          0         0
+## 3    fibRiter(100)          100   0.000       NA     0.000        0          0         0
+## 1       mfibR(100)          100   0.000       NA     0.001        0          0         0
+## 2    mfibRcpp(100)          100   0.001       NA     0.000        0          0         0</code></pre>
+
+</div>
+</div>
+<div id="a-second-example" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> A Second Example<a href="a-gentle-introduction-to-rcpp.html#a-second-example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="problem-setting" class="section level3 unnumbered hasAnchor">
+<h3>Problem Setting<a href="a-gentle-introduction-to-rcpp.html#problem-setting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The context of the example is a vector autoregressive process of order one for two variables, or in formal notation a VAR(1). More generally, a VAR model consists of a number <span class="math inline">\(K\)</span> of endogenous variable <span class="math inline">\(\mathbf{x}_t\)</span>. A VAR(p) process is then defined by a series of coefficient matrices <span class="math inline">\(A_j\)</span> with <span class="math inline">\(j\in 1, \ldots, p\)</span> such that
+<span class="math display">\[
+\mathbf{x}_t = A_1 \mathbf{x}_{t-1} + \ldots + A_p \mathbf{x}_{t-p} + \mathbf{u}_t
+\]</span></p>
+<p>For example, we are considering the simplest case of two-dimensional VAR of order one, i.e. <span class="math inline">\(\mathbf{x}_t = A_1 \mathbf{x}_{t-1} + \mathbf{u}_t\)</span>.</p>
+</div>
+<div id="r-solution-1" class="section level3 unnumbered hasAnchor">
+<h3>R solution<a href="a-gentle-introduction-to-rcpp.html#r-solution-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="a-gentle-introduction-to-rcpp.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="do">##parameter and error terms used through out</span></span>
+<span id="cb16-2"><a href="a-gentle-introduction-to-rcpp.html#cb16-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.5</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.5</span>),<span class="at">nrow=</span><span class="dv">2</span>) </span>
+<span id="cb16-3"><a href="a-gentle-introduction-to-rcpp.html#cb16-3" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">10000</span>),<span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb16-4"><a href="a-gentle-introduction-to-rcpp.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="do">##Let’s start with the Rversion </span></span>
+<span id="cb16-5"><a href="a-gentle-introduction-to-rcpp.html#cb16-5" aria-hidden="true" tabindex="-1"></a>rSim <span class="ot">&lt;-</span> <span class="cf">function</span>(coeff, errors) {</span>
+<span id="cb16-6"><a href="a-gentle-introduction-to-rcpp.html#cb16-6" aria-hidden="true" tabindex="-1"></a>  simdata <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="fu">nrow</span>(errors), <span class="fu">ncol</span>(errors))</span>
+<span id="cb16-7"><a href="a-gentle-introduction-to-rcpp.html#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (row <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(errors)) {</span>
+<span id="cb16-8"><a href="a-gentle-introduction-to-rcpp.html#cb16-8" aria-hidden="true" tabindex="-1"></a>    simdata[row,] <span class="ot">=</span> coeff <span class="sc">%*%</span> simdata[(row<span class="dv">-1</span>),] <span class="sc">+</span> errors[row,] </span>
+<span id="cb16-9"><a href="a-gentle-introduction-to-rcpp.html#cb16-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb16-10"><a href="a-gentle-introduction-to-rcpp.html#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(simdata)</span>
+<span id="cb16-11"><a href="a-gentle-introduction-to-rcpp.html#cb16-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-12"><a href="a-gentle-introduction-to-rcpp.html#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="a-gentle-introduction-to-rcpp.html#cb16-13" aria-hidden="true" tabindex="-1"></a>rData <span class="ot">&lt;-</span> <span class="fu">rSim</span>(a, u)</span></code></pre></div>
+</div>
+<div id="c-solution-1" class="section level3 unnumbered hasAnchor">
+<h3>C++ Solution<a href="a-gentle-introduction-to-rcpp.html#c-solution-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In this solution, we use <strong>RcppArmadillo</strong> via <strong>inline</strong> to compile, link and load C++ code.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="a-gentle-introduction-to-rcpp.html#cb17-1" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb17-2"><a href="a-gentle-introduction-to-rcpp.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="st">  arma::mat coeff = Rcpp::as&lt;arma::mat&gt;(a);</span></span>
+<span id="cb17-3"><a href="a-gentle-introduction-to-rcpp.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="st">  arma::mat errors = Rcpp::as&lt;arma::mat&gt;(u);</span></span>
+<span id="cb17-4"><a href="a-gentle-introduction-to-rcpp.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="st">  int m = errors.n_rows;</span></span>
+<span id="cb17-5"><a href="a-gentle-introduction-to-rcpp.html#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="st">  int n = errors.n_cols;</span></span>
+<span id="cb17-6"><a href="a-gentle-introduction-to-rcpp.html#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="st">  arma::mat simdata(m,n);</span></span>
+<span id="cb17-7"><a href="a-gentle-introduction-to-rcpp.html#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="st">  simdata.row(0) = arma::zeros&lt;arma::mat&gt;(1,n); </span></span>
+<span id="cb17-8"><a href="a-gentle-introduction-to-rcpp.html#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="st">  for (int row=1; row&lt;m; row++) {</span></span>
+<span id="cb17-9"><a href="a-gentle-introduction-to-rcpp.html#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="st">    simdata.row(row) = simdata.row(row-1)*trans(coeff) + errors.row(row);</span></span>
+<span id="cb17-10"><a href="a-gentle-introduction-to-rcpp.html#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb17-11"><a href="a-gentle-introduction-to-rcpp.html#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="st">  return Rcpp::wrap(simdata);</span></span>
+<span id="cb17-12"><a href="a-gentle-introduction-to-rcpp.html#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb17-13"><a href="a-gentle-introduction-to-rcpp.html#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="do">## create the compiled function</span></span>
+<span id="cb17-14"><a href="a-gentle-introduction-to-rcpp.html#cb17-14" aria-hidden="true" tabindex="-1"></a>rcppSim <span class="ot">&lt;-</span> <span class="fu">cxxfunction</span>(<span class="fu">signature</span>(<span class="at">a=</span><span class="st">&quot;numeric&quot;</span>, <span class="at">u=</span><span class="st">&quot;numeric&quot;</span>), </span>
+<span id="cb17-15"><a href="a-gentle-introduction-to-rcpp.html#cb17-15" aria-hidden="true" tabindex="-1"></a>                       code, <span class="at">plugin=</span><span class="st">&quot;RcppArmadillo&quot;</span>)</span>
+<span id="cb17-16"><a href="a-gentle-introduction-to-rcpp.html#cb17-16" aria-hidden="true" tabindex="-1"></a>rcppData <span class="ot">&lt;-</span> <span class="fu">rcppSim</span>(a,u)              <span class="co"># generated by C++ code</span></span>
+<span id="cb17-17"><a href="a-gentle-introduction-to-rcpp.html#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all.equal</span>(rData, rcppData)) <span class="co"># checking results</span></span></code></pre></div>
+<blockquote>
+<p>Note:</p>
+<ol style="list-style-type: decimal">
+<li>set <code>plugin = "RcppArmadillo"</code>, while in Chapter 2.2, we set <code>plugin = "Rcpp"</code>.</li>
+</ol>
+</blockquote>
+</div>
+<div id="comparison" class="section level3 unnumbered hasAnchor">
+<h3>Comparison<a href="a-gentle-introduction-to-rcpp.html#comparison" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="a-gentle-introduction-to-rcpp.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(rbenchmark)) </span>
+<span id="cb18-2"><a href="a-gentle-introduction-to-rcpp.html#cb18-2" aria-hidden="true" tabindex="-1"></a>res<span class="ot">&lt;-</span><span class="fu">benchmark</span>(<span class="fu">rcppSim</span>(a,u),</span>
+<span id="cb18-3"><a href="a-gentle-introduction-to-rcpp.html#cb18-3" aria-hidden="true" tabindex="-1"></a>               <span class="fu">rSim</span>(a,u),</span>
+<span id="cb18-4"><a href="a-gentle-introduction-to-rcpp.html#cb18-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">columns=</span><span class="fu">c</span>(<span class="st">&quot;test&quot;</span>, <span class="st">&quot;replications&quot;</span>, <span class="st">&quot;elapsed&quot;</span>,</span>
+<span id="cb18-5"><a href="a-gentle-introduction-to-rcpp.html#cb18-5" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;relative&quot;</span>, <span class="st">&quot;user.self&quot;</span>, <span class="st">&quot;sys.self&quot;</span>),</span>
+<span id="cb18-6"><a href="a-gentle-introduction-to-rcpp.html#cb18-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">order=</span><span class="st">&quot;relative&quot;</span>)</span>
+<span id="cb18-7"><a href="a-gentle-introduction-to-rcpp.html#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="a-gentle-introduction-to-rcpp.html#cb18-8" aria-hidden="true" tabindex="-1"></a>res</span></code></pre></div>
+<pre><code>##            test replications elapsed relative user.self sys.self
+## 1 rcppSim(a, u)          100   0.012     1.00     0.012    0.001
+## 2    rSim(a, u)          100   0.393    32.75     0.388    0.004</code></pre>
 
 </div>
 </div>
@@ -271,8 +473,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tools-and-setup.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

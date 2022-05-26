@@ -1,0 +1,109 @@
+# Tools and Setup
+```{r echo = FALSE, message = FALSE, warning = FALSE}
+library(Rcpp)
+library(inline)
+library(RcppArmadillo)
+setwd("~/Documents/GitHub/Seamless_R_and_Cpp/")
+```
+
+
+## The inline package {-}
+```{r}
+src<-'
+Rcpp::NumericVector xa(a);
+Rcpp::NumericVector xb(b);
+int n_xa = xa.size(), n_xb = xb.size();
+
+Rcpp::NumericVector xab(n_xa + n_xb - 1);
+for(int i=0; i<n_xa; i++)
+for(int j=0; j<n_xb; j++)
+  xab[i + j] += xa[i] * xb[j];
+return xab; 
+'
+fun <- cxxfunction(signature(a="numeric", b="numeric"),
+                   src,plugin="Rcpp") 
+
+fun( 1:4, 2:5 )
+```
+The function body is provided by the R character variable `src`, the function header (and its variables and their names) is defined by the argument `signature`, and we only need to enable `plugin=="Rcpp"` to obtain a new R function fun based on the C++ code in `src`. 
+
+> Note: 
+> 
+> 1. with version 0.3.10 or later of `inline`, a convenience wrapper rcpp is available which automatically adds the `plugin="Rcpp"` argument so that the invocation could also have been written as `fun <- rcpp(signature(a="numeric", b="numeric"), src)`
+> 2. Adding `verbose=TRUE` shows both the temporary file created by cxxfunction() and the invocations by `R CMD SHLIB`
+> 3. Through this approah, we do not need to define the input variables `a` and `b` in `src`. 
+> 4. `Rcpp::NumericVector`
+
+```{r}
+inc<-'
+  template <typename T>
+  class square : public std::unary_function<T,T> {
+  public:
+    T operator()( T t) const { return t*t ;}
+  };
+'
+src <- '
+  double x = Rcpp::as<double>(xs);
+  int i = Rcpp::as<int>(is);
+  square<double> sqdbl;
+  square<int> sqint;
+  Rcpp::DataFrame df =
+    Rcpp::DataFrame::create(Rcpp::Named("x", sqdbl(x)), 
+                            Rcpp::Named("i", sqint(i)));
+  return df; 
+'
+fun <- cxxfunction(signature(xs="numeric", is="integer"),
+                   body=src,include=inc,plugin="Rcpp")
+fun(2.2, 3L)
+```
+
+> Note: 
+> 
+> 1. use `include` to include another block of code to, say, define a new struct or class type.
+> 2. In `inc`, it defines a sample helper class `square` which derives from a public class `std::unary_function` templated to the same argument and return type. In `src`, it uses `square<double> sqdbl` and `square<int> sqint` for two types of variables. 
+> 4. `Rcpp::DataFrame::create(Rcpp::Named("x", sqdbl(x)))`
+
+
+```{r}
+src <-  '
+Rcpp::NumericVector yr(ys) ;
+Rcpp::NumericMatrix Xr(Xs) ;
+int n = Xr.nrow(), k = Xr.ncol();
+
+arma::mat X(Xr.begin(), n, k, false) ;
+arma::colvec y(yr.begin(), yr.size (), false);
+
+arma::colvec coef = arma::solve(X, y);    // fit y ~ X
+arma::colvec res = y - X*coef;   // residuals
+
+double s2 = std::inner_product(res.begin(), res.end(), 
+                               res.begin(), double())/(n - k);
+arma::colvec se = arma::sqrt(s2 * 
+                            arma::diagvec(arma::inv(arma::trans(X)*X)));
+
+return Rcpp::List::create(Rcpp::Named("coef", coef), 
+                          Rcpp::Named("se")  = se,
+                          Rcpp::Named("df")  = n-k);
+'
+fun<-cxxfunction(signature(ys="numeric", Xs="numeric"),
+                 src, plugin="RcppArmadillo")
+
+X <- matrix(rnorm(100), nrow = 50)
+y <- X %*% 1:2 + rnorm(50)
+
+fun(ys = y, Xs = X)
+```
+
+> Note: 
+> 
+> 1. `arma::mat X(Xr.begin(), n, k, false)`: define a matrix `X` 
+> 2. `arma::colvec coef = arma::solve(X, y)`: solve the regression y ~ X
+> 3. `std::inner_product(res.begin(), res.end(), res.begin(), double())/(n - k);`: get the variance
+> 4. `arma::diagvec(arma::inv(arma::trans(X)*X)))`: get the diagional elements of $(X'X)^{-1}$
+> 5. `Rcpp::List::create(...)`: create a list
+> 6. `Rcpp::Named("coef") = coef` is equivalent to `Rcpp::Named("coef", coef)`
+
+
+## Rcpp Attributes {-}
+
+
