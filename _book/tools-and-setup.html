@@ -23,7 +23,7 @@
 <meta name="author" content="Hao Sun" />
 
 
-<meta name="date" content="2022-05-26" />
+<meta name="date" content="2022-05-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -162,6 +162,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="tools-and-setup.html"><a href="tools-and-setup.html#the-inline-package"><i class="fa fa-check"></i>The inline package</a></li>
 <li class="chapter" data-level="" data-path="tools-and-setup.html"><a href="tools-and-setup.html#rcpp-attributes"><i class="fa fa-check"></i>Rcpp Attributes</a></li>
+<li class="chapter" data-level="" data-path="tools-and-setup.html"><a href="tools-and-setup.html#exception-handling"><i class="fa fa-check"></i>Exception Handling</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -272,13 +273,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb24-27"><a href="tools-and-setup.html#cb24-27" aria-hidden="true" tabindex="-1"></a><span class="fu">fun</span>(<span class="at">ys =</span> y, <span class="at">Xs =</span> X)</span></code></pre></div>
 <pre><code>## $coef
 ##          [,1]
-## [1,] 1.042291
-## [2,] 1.763670
+## [1,] 1.244583
+## [2,] 1.884694
 ## 
 ## $se
 ##           [,1]
-## [1,] 0.1613696
-## [2,] 0.1322274
+## [1,] 0.1644080
+## [2,] 0.1455334
 ## 
 ## $df
 ## [1] 48</code></pre>
@@ -296,6 +297,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="rcpp-attributes" class="section level2 unnumbered hasAnchor">
 <h2>Rcpp Attributes<a href="tools-and-setup.html#rcpp-attributes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="tools-and-setup.html#cb26-1" aria-hidden="true" tabindex="-1"></a>cpptxt <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb26-2"><a href="tools-and-setup.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="st">int fibonacci(const int x) {</span></span>
+<span id="cb26-3"><a href="tools-and-setup.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="st"> if (x &lt; 2) return(x);</span></span>
+<span id="cb26-4"><a href="tools-and-setup.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="st"> return (fibonacci(x - 1)) + fibonacci(x - 2);</span></span>
+<span id="cb26-5"><a href="tools-and-setup.html#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="st">}&#39;</span></span>
+<span id="cb26-6"><a href="tools-and-setup.html#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="tools-and-setup.html#cb26-7" aria-hidden="true" tabindex="-1"></a>fibCpp <span class="ot">&lt;-</span> <span class="fu">cppFunction</span>(cpptxt)</span></code></pre></div>
+<blockquote>
+<p>Notes</p>
+<ol style="list-style-type: decimal">
+<li>“Rcpp attributes” internalizes key features of the <strong>inline</strong> package while at the same time reusing some of the infrastructure built for use by inline such as the plugins.</li>
+<li>“Rcpp attributes” adds new functions <code>sourceCpp</code> to source a C++ function (similar to how <code>source</code> is used for R code), <code>cppFunction</code> for a similar creation of a function from a character argument, <code>evalCpp</code> for a direct evaluation of a C++ expression and more.</li>
+<li><code>cppFunction</code> returns an R function which calls a <strong>wrapper</strong>, also created by <code>cppFunction</code> in a temporary file which it also builds. The wrapper function in turn calls the C++ function we passed as a character string.</li>
+<li>Alternatively, we could pass the name of a file containing the code to the function <code>sourceCpp</code> which would compile, link, and load the corresponding C++ code and assign it to the R function on the left-hand side of the assignment. (see the first example)</li>
+</ol>
+</blockquote>
+</div>
+<div id="exception-handling" class="section level2 unnumbered hasAnchor">
+<h2>Exception Handling<a href="tools-and-setup.html#exception-handling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="tools-and-setup.html#cb27-1" aria-hidden="true" tabindex="-1"></a>extern <span class="st">&quot;C&quot;</span> SEXP <span class="fu">fun</span>( SEXP x ) { </span>
+<span id="cb27-2"><a href="tools-and-setup.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  try {</span>
+<span id="cb27-3"><a href="tools-and-setup.html#cb27-3" aria-hidden="true" tabindex="-1"></a>    int dx <span class="ot">=</span> Rcpp<span class="sc">::</span>as<span class="sc">&lt;</span>int<span class="sc">&gt;</span>(x);</span>
+<span id="cb27-4"><a href="tools-and-setup.html#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (dx <span class="sc">&gt;</span> <span class="dv">10</span>)</span>
+<span id="cb27-5"><a href="tools-and-setup.html#cb27-5" aria-hidden="true" tabindex="-1"></a>      throw std<span class="sc">::</span><span class="fu">range_error</span>(<span class="st">&quot;too big&quot;</span>);</span>
+<span id="cb27-6"><a href="tools-and-setup.html#cb27-6" aria-hidden="true" tabindex="-1"></a>    return Rcpp<span class="sc">::</span><span class="fu">wrap</span>(dx <span class="sc">*</span> dx);</span>
+<span id="cb27-7"><a href="tools-and-setup.html#cb27-7" aria-hidden="true" tabindex="-1"></a>    } <span class="fu">catch</span>( std<span class="sc">::</span>exception<span class="sc">&amp;</span> __ex__) {</span>
+<span id="cb27-8"><a href="tools-and-setup.html#cb27-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">forward_exception_to_r</span>(__ex__); </span>
+<span id="cb27-9"><a href="tools-and-setup.html#cb27-9" aria-hidden="true" tabindex="-1"></a>    } <span class="fu">catch</span>(...) {</span>
+<span id="cb27-10"><a href="tools-and-setup.html#cb27-10" aria-hidden="true" tabindex="-1"></a>      <span class="sc">::</span><span class="fu">Rf_error</span>( <span class="st">&quot;c++ exception (unknown reason)&quot;</span> ); </span>
+<span id="cb27-11"><a href="tools-and-setup.html#cb27-11" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb27-12"><a href="tools-and-setup.html#cb27-12" aria-hidden="true" tabindex="-1"></a>  return R_NilValue; <span class="sc">/</span><span class="er">/</span> not reached</span>
+<span id="cb27-13"><a href="tools-and-setup.html#cb27-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<blockquote>
+<p>Note:</p>
+<ol style="list-style-type: decimal">
+<li>In essence, inside a segment of code preceded by the keyword <code>try</code>, an exception can be thrown via the keyword <code>throw</code> followed by an appropriately typed exception object which is typically inherited from the <code>std::exceptions type</code>.</li>
+<li>What happens after the <code>throw</code> is that a suitable <code>catch()</code> segment is identified. Here, as the exception was typed with a type inherited from the standard exception, the first branch is the one the code enters. The exception is then passed to an internal Rcpp function which converts it into an R error message. And indeed, at the R level, we see both that an exception was caught and what its type was.</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="tools-and-setup.html#cb28-1" aria-hidden="true" tabindex="-1"></a>src <span class="ot">&lt;-</span> <span class="st">&#39;</span></span>
+<span id="cb28-2"><a href="tools-and-setup.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="st">int dx = Rcpp::as&lt;int&gt;(x); </span></span>
+<span id="cb28-3"><a href="tools-and-setup.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="st">if( dx &gt; 10 )</span></span>
+<span id="cb28-4"><a href="tools-and-setup.html#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="st">  throw std::range_error(&quot;too big&quot;);</span></span>
+<span id="cb28-5"><a href="tools-and-setup.html#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="st">return Rcpp::wrap( dx * dx);</span></span>
+<span id="cb28-6"><a href="tools-and-setup.html#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;</span></span>
+<span id="cb28-7"><a href="tools-and-setup.html#cb28-7" aria-hidden="true" tabindex="-1"></a>fun <span class="ot">&lt;-</span> <span class="fu">cxxfunction</span>(<span class="fu">signature</span>(<span class="at">x=</span><span class="st">&quot;int&quot;</span>), <span class="at">body=</span>src, <span class="at">plugin=</span><span class="st">&quot;Rcpp&quot;</span>) </span>
+<span id="cb28-8"><a href="tools-and-setup.html#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="fu">fun</span>(<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 9</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="tools-and-setup.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fun(13)  # Error in fun(13) : too big</span></span></code></pre></div>
 
 </div>
 </div>

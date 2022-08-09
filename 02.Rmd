@@ -106,4 +106,56 @@ fun(ys = y, Xs = X)
 
 ## Rcpp Attributes {-}
 
+```{r}
+cpptxt <- '
+int fibonacci(const int x) {
+ if (x < 2) return(x);
+ return (fibonacci(x - 1)) + fibonacci(x - 2);
+}'
+
+fibCpp <- cppFunction(cpptxt)
+```
+
+> Notes
+> 
+> 1. “Rcpp attributes” internalizes key features of the **inline** package while at the same time reusing some of the infrastructure built for use by inline such as the plugins.
+> 2. “Rcpp attributes” adds new functions `sourceCpp` to source a C++ function (similar to how `source` is used for R code), `cppFunction` for a similar creation of a function from a character argument, `evalCpp` for a direct evaluation of a C++ expression and more.
+> 3. `cppFunction` returns an R function which calls a **wrapper**, also created by `cppFunction` in a temporary file which it also builds. The wrapper function in turn calls the C++ function we passed as a character string. 
+> 4. Alternatively, we could pass the name of a file containing the code to the function `sourceCpp` which would compile, link, and load the corresponding C++ code and assign it to the R function on the left-hand side of the assignment. (see the first example)
+
+
+## Exception Handling {-}
+```{r eval = FALSE}
+extern "C" SEXP fun( SEXP x ) { 
+  try {
+    int dx = Rcpp::as<int>(x);
+    if (dx > 10)
+      throw std::range_error("too big");
+    return Rcpp::wrap(dx * dx);
+    } catch( std::exception& __ex__) {
+      forward_exception_to_r(__ex__); 
+    } catch(...) {
+      ::Rf_error( "c++ exception (unknown reason)" ); 
+    }
+  return R_NilValue; // not reached
+}
+```
+
+> Note:
+> 
+> 1. In essence, inside a segment of code preceded by the keyword `try`, an exception can be thrown via the keyword `throw` followed by an appropriately typed exception object which is typically inherited from the `std::exceptions type`. 
+> 2. What happens after the `throw` is that a suitable `catch()` segment is identified. Here, as the exception was typed with a type inherited from the standard exception, the first branch is the one the code enters. The exception is then passed to an internal Rcpp function which converts it into an R error message. And indeed, at the R level, we see both that an exception was caught and what its type was.
+
+
+```{r}
+src <- '
+int dx = Rcpp::as<int>(x); 
+if( dx > 10 )
+  throw std::range_error("too big");
+return Rcpp::wrap( dx * dx);
+'
+fun <- cxxfunction(signature(x="int"), body=src, plugin="Rcpp") 
+fun(3)
+# fun(13)  # Error in fun(13) : too big
+```
 

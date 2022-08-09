@@ -1,0 +1,129 @@
+# Data Structures: Part One
+
+## The RObject Class
+
+A large number of user-visible classes derive from `RObject` class: 
++ `IntegerVector` for vectors of type `integer`
++ `NumericVector` for vectors of type `numeric`
++ `LogicalVector` for vectors of type `logical` 
++ `CharacterVector` for vectors of type `character`
++ `GenericVector` for generic vectors which implement `List` types. 
++ `ExpressionVector` for vectors of `expression` types. 
++ `RawVector` for vectors of type `raw`.
+
+For `integer` and `numeric` types, we also have `IntegerMatrix` and `NumericMatrix` corresponding to equivalent R types. 
+
+
+## The IntegerVector Class 
+
+Transform R objects to C++ and inverse direction: 
++ `as<>`: convert R object to C++ object
++ `warp<>` convert C++ object to R 
+
+##### Example: Using Inputs {-}
+```{r}
+src <- '
+Rcpp::IntegerVector vec(vx) ;
+int prod = 1 ;
+for (int i=0; i<vec.size(); i++) {
+  prod *= vec[i] ;
+}
+return Rcpp::wrap(prod) ;
+'
+fun <- cxxfunction(signature(vx = "integer"), src, plugin="Rcpp")
+fun(1:10) # creates integer vector
+
+# through Standard Template Library
+src2 <- '
+Rcpp::IntegerVector vec(vx) ;
+int prod = std::accumulate(vec.begin(), vec.end(), 1, std::multiplies<int>());
+return Rcpp::wrap(prod) ;
+'
+fun2 <- cxxfunction(signature(vx = "integer"), src2, plugin="Rcpp")
+fun2(1:10) 
+```
+> Notes: 
+> 
+> 1. `accumulate(first, last, init, op)`
+> 2. `std::multiplies<int>()` 
+
+##### Example: Using Wrong Inputs
+```{r}
+fun(seq(1.0, 1.9, by = 0.1))
+fun2(seq(1.0, 1.9, by = 0.1))
+
+# fun(LETTERS[1:10])
+
+# modify the code 2 
+src3 <- '
+Rcpp::NumericVector ved(vx) ;
+double prod = std::accumulate(ved.begin(), ved.end(), 1.0, std::multiplies<double>());
+return Rcpp::wrap(prod) ;
+'
+fun3 <- cxxfunction(signature(vx = "numeric"), src3, plugin="Rcpp")
+fun3(seq(1.0, 1.9, by = 0.1))
+
+```
+
+
+## The NumericVector Class 
+
+```{r}
+src <- '
+  Rcpp::NumericVector vec(vx); 
+  double p = Rcpp::as<double>(dd); 
+  double sum = 0.0; 
+  for(int i = 0; i< vec.size(); i++) {
+    sum += pow(vec[i], p);
+  }
+  return Rcpp::wrap(sum); 
+'
+fun <- cxxfunction(signature(vx="numeric",dd="numeric"), 
+                 src, plugin = "Rcpp")
+fun(1:4, 2)
+fun(1:4, 2.2)
+```
+
+##### Example: Clone {-}
+```{r}
+scr <- "
+  Rcpp::NumericVector invec(vx);
+  Rcpp::NumericVector outvec(vx);
+  for(int i = 0; i < invec.size(); i++) {
+    outvec[i] = log(invec[i]);
+  }
+  return outvec; 
+"
+
+scr_clone <- "
+  Rcpp::NumericVector invec(vx);
+  Rcpp::NumericVector outvec = Rcpp::clone(vx);
+  for(int i = 0; i < invec.size(); i++) {
+    outvec[i] = log(invec[i]);
+  }
+  return outvec; 
+"
+
+fun <- cxxfunction(signature(vx="numeric"), scr, plugin = "Rcpp")
+fun_clone <- cxxfunction(signature(vx="numeric"), scr_clone, plugin = "Rcpp")
+
+x <- seq(1, 1.5, by = 0.1); y <- seq(1, 1.5, by = 0.1)
+cbind(x, fun(x), y, fun_clone(y))
+```
+> Note: 
+> 
+> 1. In the first example, `outvec` underlying pointer shares with the same underlying R object with `invec`.  Changes will therefore also affect the R object passed in as an argument. The `clone` method is a suitable alternative as it allocates memory for a new object.
+
+```{r}
+# A simpler approach: 
+scr_simple <- "
+  Rcpp::NumericVector invec(vx);
+  Rcpp::NumericVector outvec = log(invec); 
+  return outvec; 
+"
+
+fun_simple <- cxxfunction(signature(vx="numeric"), scr_simple, plugin = "Rcpp")
+x <- seq(1, 1.5, by = 0.1)
+cbind(x, fun_simple(x))
+```
+
